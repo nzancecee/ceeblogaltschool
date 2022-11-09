@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const server = require('../server')
 const supertest = require('supertest')
-
+const test = supertest(server)
 const User = require('../models/User')
 
 beforeEach(async () => {
@@ -14,9 +14,9 @@ beforeEach(async () => {
   })
 })
 
-describe('POST request to /api/login', () => {
+describe('POST request to /login', () => {
   test('is successful if user is registered in the database', async () => {
-    const response = await api
+    const response = await test
       .post('/login')
       .send({
         email: 'johndoe@gmail.com',
@@ -28,7 +28,7 @@ describe('POST request to /api/login', () => {
   })
 
   test('returns error if incorrect details are sent', async () => {
-    const response = await api
+    const response = await test
       .post('/login')
       .send({
         email: 'johndoe@gmail.com',

@@ -13,11 +13,7 @@ lastName: {
     required: true
 },
 
-// username :{
-//     type: String,
-//     required: true,
-//     unique: true,
-// },
+
 
 email:{
     type: String,
@@ -30,9 +26,9 @@ password:{
     required:true ,
 },
 
-// created: {
-//     type: Date,
-//     default:Date.now()}
+created: {
+    type: Date,
+    default:Date.now()}
 });
 
 // encrypt password before saving

@@ -1,0 +1,159 @@
+# Blog app
+This is an api for a blogging app
+
+---
+
+## Requirements
+1. User should be able to signin 
+2. User should be able to login
+3. Implement jwt auth
+4. User should be able to get blogs
+5. Users should be able to create blogs
+6. Users should be able to update and delete blogs
+7. Test application
+---
+## Setup
+- Install NodeJS, mongodb
+- pull this repo
+- update env with example.env
+- run `npm run start:dev`
+
+---
+## Base URL
+- https://ceeblog.onrender.com
+
+
+## Models
+---
+
+### User
+| field  |  data_type | constraints  |
+|---|---|---|
+|  id |  string |  required |
+|  
+|  firstname | string  |  optional|
+|  lastname  |  string |  optional  |
+|  email     | string  |  optional |
+|  password |   string |  required  |
+| 
+
+
+### Article/blog
+| field  |  data_type | constraints  |
+|---|---|---|
+|  title |  string |  required | unique
+|  description |  string|   |
+|  author| string |  ref: user|required
+|  state |  string |  default | enum:['draft','published']
+|  read_count    | number  |  required |
+
+
+
+
+## APIs
+---
+
+### Signup User
+
+- Route: /signup
+- Method: POST
+- Body: 
+```
+{
+ 
+  "firstname": "jon",
+  "lastname": "doe",
+   "email": "doe@example.com",
+  "password": "Password1",
+  
+}
+```
+
+- Responses
+
+Success
+```
+{
+    message: 'Signup successful',
+    user: {
+       
+        "firstname": "john",
+        "lastname": "doe",
+         "email": "doe@example.com",
+        "password": "Password1",
+        
+    }
+}
+```
+---
+### Login User
+
+- Route: /login
+- Method: POST
+- Body: 
+```
+{
+    "username": 'john_doe",
+    "password": "johndoe1",
+ 
+}
+```
+
+- Responses
+
+Success
+```
+{
+    message: 'Login successful',
+    token: 'sjlkafjkldsfjsd'
+}
+```
+
+---
+### Create Article/blog
+
+- Route: /orders
+- Method: POST
+- Header
+    - Authorization: Bearer {token}
+- Body: 
+```
+{
+    Details: [{ title: 'How to', description: 'a blog on how to', created_at: 'Mon Nov 07 2022 08:35:00 GMT+0100', author:'john doe'}]
+}
+```
+
+- Responses
+
+Success
+```
+{
+    title: How to ,
+    description: a blog on how to,
+    created_at: Mon Nov 07 2022 08:35:00 GMT+0100,
+    author: [{ FirstName, lastName}]
+}
+```
+---
+### Get articles/blogs
+
+- Route: /articles:id
+- Method: GET
+- Header
+    - Authorization: Bearer {token}
+- Responses
+
+Success
+```
+{
+     title: How to ,
+    description: a blog on how to,
+    created_at: Mon Nov 07 2022 08:35:00 GMT+0100,
+    author: [{ FirstName, lastName}]
+}
+```
+---
+
+
+
+
